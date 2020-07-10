@@ -14,7 +14,7 @@ import java.sql.Date;
 @Entity
 @Data
 @DynamicUpdate
-public class ProductCategory implements Serializable {
+public class ProductCategory {
     @Id
     @GeneratedValue
     private Integer categoryId;

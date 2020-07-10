@@ -13,7 +13,7 @@ import java.io.Serializable;
     @Data
     @Table(name = "users")
     @NoArgsConstructor
-    public class User implements Serializable {
+    public class User{
 
         private static final long serialVersionUID = 4887904943282174032L;
         @Id

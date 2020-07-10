@@ -19,7 +19,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @DynamicUpdate
-public class OrderMain implements Serializable {
+public class OrderMain{
 
     @Id
     @NotNull
