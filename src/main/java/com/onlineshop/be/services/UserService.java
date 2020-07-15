@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 @Service
 public interface UserService {
-    User findOne(String email);
+    User findByName(String email);
 
     Collection<User> findByRole(String role);
     User save(User user);

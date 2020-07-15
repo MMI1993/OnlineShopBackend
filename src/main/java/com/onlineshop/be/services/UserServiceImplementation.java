@@ -1,7 +1,6 @@
 package com.onlineshop.be.services;
 
 import com.onlineshop.be.model.User;
-import com.onlineshop.be.repository.CartRepo;
 import com.onlineshop.be.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,14 +12,9 @@ import java.util.Collection;
 public class UserServiceImplementation implements UserService {
     @Autowired
     private UserRepo userRepository;
-    @Autowired
-    private CartRepo cartRepository;
-
-
-
 
     @Override
-    public User findOne(String email) {
+    public User findByName(String email) {
         return userRepository.findByEmail(email);
     }
 

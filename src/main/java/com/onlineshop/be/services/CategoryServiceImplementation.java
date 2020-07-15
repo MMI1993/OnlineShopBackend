@@ -17,7 +17,6 @@ public class CategoryServiceImplementation implements CategoryService {
     @Override
     public List<ProductCategory> findAll() {
         List<ProductCategory> res = productCategoryRepository.findAllByOrderByCategoryType();
-        //  res.sort(Comparator.comparing(ProductCategory::getCategoryType));
         return res;
     }
 

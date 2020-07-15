@@ -31,7 +31,7 @@ public class CartController {
 
     @PostMapping("")
     public ResponseEntity<Cart> mergeCart(@RequestBody Collection<ProductInOrder> productInOrders, Principal principal) {
-        User user = userService.findOne(principal.getName());
+        User user = userService.findByName(principal.getName());
         try {
             cartService.mergeLocalCart(productInOrders, user);
         } catch (Exception e) {
@@ -42,7 +42,7 @@ public class CartController {
 
     @GetMapping("")
     public Cart getCart(Principal principal) {
-        User user = userService.findOne(principal.getName());
+        User user = userService.findByName(principal.getName());
         return cartService.getCart(user);
     }
 
@@ -60,14 +60,14 @@ public class CartController {
 
     @PutMapping("/{itemId}")
     public ProductInOrder modifyItem(@PathVariable("itemId") String itemId, @RequestBody Integer quantity, Principal principal) {
-        User user = userService.findOne(principal.getName());
+        User user = userService.findByName(principal.getName());
         productInOrderService.update(itemId, quantity, user);
         return productInOrderService.findOne(itemId, user);
     }
 
     @DeleteMapping("/{itemId}")
     public void deleteItem(@PathVariable("itemId") String itemId, Principal principal) {
-        User user = userService.findOne(principal.getName());
+        User user = userService.findByName(principal.getName());
         cartService.delete(itemId, user);
         // flush memory into DB
     }
@@ -75,7 +75,7 @@ public class CartController {
 
     @PostMapping("/checkout")
     public ResponseEntity checkout(Principal principal) {
-        User user = userService.findOne(principal.getName());// Email as username
+        User user = userService.findByName(principal.getName());// Email as username
         cartService.checkout(user);
         return ResponseEntity.ok(null);
     }

@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+
 @Service
 public class ProductServiceImplementation implements ProductService {
 
@@ -27,7 +28,7 @@ public class ProductServiceImplementation implements ProductService {
 
     @Override
     public Page<ProductInfo> findUpAll(Pageable pageable) {
-        return productInfoRepository.findAllByCategoryTypeOrderByIdAsc(OrderAndProductStatus.UP.getCode(),pageable);
+        return productInfoRepository.findAllByCategoryTypeOrderByIdAsc(OrderAndProductStatus.UP.getCode(), pageable);
     }
 
     @Override
@@ -58,7 +59,7 @@ public class ProductServiceImplementation implements ProductService {
         if (productInfo == null) throw new CustomizedExceptions(Results.PRODUCT_NOT_EXIST);
 
         int update = productInfo.getProductStock() - amount;
-        if(update <= 0) throw new CustomizedExceptions(Results.PRODUCT_LIMITED_STOCK );
+        if (update <= 0) throw new CustomizedExceptions(Results.PRODUCT_LIMITED_STOCK);
 
         productInfo.setProductStock(update);
         productInfoRepository.save(productInfo);
@@ -82,26 +83,22 @@ public class ProductServiceImplementation implements ProductService {
     @Transactional
     public ProductInfo onSale(String productId) {
         ProductInfo productInfo = findOne(productId);
-        if (productInfo == null) throw new CustomizedExceptions(Results.PRODUCT_NOT_EXIST);
-
+        if (productInfo == null) {
+            throw new CustomizedExceptions(Results.PRODUCT_NOT_EXIST);
+        }
         if (productInfo.getProductStatus() == OrderAndProductStatus.UP.getCode()) {
             throw new CustomizedExceptions(Results.PRODUCT_STATUS_ERROR);
         }
-
         productInfo.setProductStatus(OrderAndProductStatus.UP.getCode());
         return productInfoRepository.save(productInfo);
     }
 
     @Override
     public ProductInfo update(ProductInfo productInfo) {
-
-        // if null throw exception
         categoryService.findByCategoryType(productInfo.getCategoryType());
-        if(productInfo.getProductStatus() > 1) {
+        if (productInfo.getProductStatus() > 1) {
             throw new CustomizedExceptions(Results.PRODUCT_STATUS_ERROR);
         }
-
-
         return productInfoRepository.save(productInfo);
     }
 
@@ -113,10 +110,9 @@ public class ProductServiceImplementation implements ProductService {
     @Override
     public void delete(String productId) {
         ProductInfo productInfo = findOne(productId);
-        if (productInfo == null) throw new CustomizedExceptions(Results.PRODUCT_NOT_EXIST);
+        if (productInfo == null) {
+            throw new CustomizedExceptions(Results.PRODUCT_NOT_EXIST);
+        }
         productInfoRepository.delete(productInfo);
-
     }
-
-
 }
