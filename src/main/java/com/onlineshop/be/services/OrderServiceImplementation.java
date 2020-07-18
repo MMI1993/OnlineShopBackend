@@ -31,7 +31,7 @@ public class OrderServiceImplementation implements OrderService {
 
     @Override
     public Page<OrderMain> findAll(Pageable pageable) {
-        return orderRepository.findAllByOrderStatusAscCreateTimeDesc(pageable);
+        return orderRepository.findAll(pageable);
     }
 
     @Override

@@ -13,7 +13,7 @@ import java.sql.Date;
 @DynamicUpdate
 public class ProductInfo {
     @Id
-    private String Id;
+    private String id;
 
     @Column
     private String productName;
@@ -36,6 +36,4 @@ public class ProductInfo {
     private Date createTime;
     @Column
     private Date updateTime;
-
-
 }
