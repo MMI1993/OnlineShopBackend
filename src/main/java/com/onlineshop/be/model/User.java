@@ -13,7 +13,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class User {
 
-    private static final long serialVersionUID = 4887904943282174032L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
